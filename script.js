@@ -7,6 +7,8 @@ const FR_DISPLAY = document.getElementById("cityPictureDisplayFR");
 const UK_DISPLAY = document.getElementById("cityPictureDisplayUK");
 const FR_FLAG = document.getElementById("flagDisplayFR");
 const UK_FLAG = document.getElementById("flagDisplayUK");
+
+
 function flagDisplayOfLanguageChosen() {
   let languageSelected = document.getElementById("languageSelect").value;
   if (languageSelected) {

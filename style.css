@@ -65,11 +65,16 @@ html {
   font-size: 16px;
   font-family: var(--second-font);
   background-color: var(--main-color);
+  display: flex;
+  justify-content: center;
+ 
   body {
     background-color: var(--background-color);
     border-radius: 15px;
     margin: 0.2rem;
     padding: 1rem;
+    max-width: 25rem;
+
   }
   header {
     display: flex;
@@ -109,6 +114,7 @@ html {
         margin-top: -1.5rem;
         color: rgb(255, 255, 255);
         font-size: 30px;
+        position: relative;
       }
 
       button {
@@ -167,6 +173,8 @@ html {
         margin-top: -1.5rem;
         color: rgb(255, 255, 255);
         font-size: 30px;
+        position: relative;
+
       }
       button {
         padding: 1rem;

@@ -1,6 +1,7 @@
 const LANGUAGE_SELECTED = sessionStorage.getItem("languageSelected");
-const volumeOnButton = document.getElementById("volumeOn");
-const volumeOffButton = document.getElementById("volumeOff");
+const VOLUME_ON_BUTTON = document.getElementById("volumeOn");
+const VOLUME_OFF_BUTTON = document.getElementById("volumeOff");
+VOLUME_OFF_BUTTON.style.display = "none"
 
 const FR_DISPLAY = document.getElementById("cityPictureDisplayFR");
 const UK_DISPLAY = document.getElementById("cityPictureDisplayUK");
@@ -10,7 +11,6 @@ const UK_FLAG = document.getElementById("flagDisplayUK");
 const volumeState = sessionStorage.getItem("volume") || "on";
 updateVolumeUI(volumeState);
 
-// Fonction pour mettre à jour l'interface en fonction de l'état du volume
 function updateVolumeUI(volumeState) {
   if (volumeState === "on") {
     console.log("Volume activé");
@@ -19,44 +19,55 @@ function updateVolumeUI(volumeState) {
   }
 }
 
-function flagDisplayOfLanguageChosen() {
-  if (LANGUAGE_SELECTED) {
-    if (LANGUAGE_SELECTED === "french") {
-      FR_DISPLAY.style.display = "block";
-      FR_FLAG.style.display = "block";
-      UK_DISPLAY.style.display = "none";
-      UK_FLAG.style.display = "none";
-    } else if (LANGUAGE_SELECTED === "english") {
-      FR_DISPLAY.style.display = "none";
-      FR_FLAG.style.display = "none";
-      UK_DISPLAY.style.display = "block";
-      UK_FLAG.style.display = "block";
-    }
+function playSound(sound) {
+  if (soundEnabled.value) { // Si le son est activé
+    sound.currentTime = 0;
+    sound.play(); // Alors on joue le son
   }
 }
 
+
+
 function themeSelectedSetting() {
   let themeSelected = document.getElementById("themeSelect").value;
-  console.log(themeSelected);
+  return themeSelected ;
 }
+
+function displayVolumeButton(){
+  
+  VOLUME_ON_BUTTON.addEventListener("click", () => {
+  VOLUME_OFF_BUTTON.style.display = "block";
+  VOLUME_ON_BUTTON.style.display = "none";
+
+  sessionStorage.setItem("volume", "off");
+  updateVolumeUI("off");
+  });
+  
+  VOLUME_OFF_BUTTON.addEventListener("click", () => {
+  VOLUME_ON_BUTTON.style.display = "block";
+  VOLUME_OFF_BUTTON.style.display = "none";
+  sessionStorage.setItem("volume", "on"); 
+  updateVolumeUI("on");
+  });
+
+}
+
 
 function menu() {
   const SELECT_FORM_THEME = document.getElementById("themeSelect");
   flagDisplayOfLanguageChosen();
   SELECT_FORM_THEME.addEventListener("click", () => {
-    themeSelectedSetting();
+  themeSelectedSetting();
   });
 
-  // Gestion des clics sur les boutons
-volumeOnButton.addEventListener("click", () => {
-    sessionStorage.setItem("volume", "on"); // Sauvegarde l'état dans sessionStorage
-    updateVolumeUI("on"); // Met à jour l'interface
-  });
-  
-  volumeOffButton.addEventListener("click", () => {
-    sessionStorage.setItem("volume", "off"); // Sauvegarde l'état dans sessionStorage
-    updateVolumeUI("off"); // Met à jour l'interface
-  });
+
+  displayVolumeButton();
+
+  //Event Listner Demarer button
+  const THEME_SELECTED = themeSelectedSetting();
+  sessionStorage.setItem("themeSelected", THEME_SELECTED);
   
 }
+
+
 menu();
